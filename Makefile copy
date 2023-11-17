@@ -1,4 +1,0 @@
-
-
-build:
-	g++ src/*.cpp -lSDL2 -lSDL2_ttf -std=c++17 -o app
