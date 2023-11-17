@@ -20,9 +20,8 @@ void createObjects(App &app){
     app.root_obj = con;
     
     { //label
-        Label *label = new Label(
-            "Hello my friends, whats up?",
-            "/home/marek/Dokumenty/cpp_projects/sdl/fonts/SourceCodePro-Regular.ttf",
+        Label *label = new Label("Hey, what's up?",
+            "../fonts/SourceCodePro-Regular.ttf",
             20, {255,255,255}, true);
         label->loadFont();
         label->setPosition({100,100});

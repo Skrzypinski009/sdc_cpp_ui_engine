@@ -48,8 +48,8 @@ void App::stop(){
 
 void App::loop(){
     
-    draw();
     while(true){
+        draw();
         event_manager.update();
         if(event_manager.exit_signal) 
             return;
