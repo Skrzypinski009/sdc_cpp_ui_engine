@@ -1,9 +1,9 @@
-#include "../include/fit_container.h"
-#include "../include/container.h"
-#include "../include/veci2.h"
-#include "../include/object.h"
+#include "fit_container.h"
+#include "container.h"
+#include "veci2.h"
+#include "object.h"
 
-#include <SDL2/SDL_render.h>
+#include "SDL.h"
 #include <iostream>
 
 FitContainer::FitContainer()

@@ -1,5 +1,5 @@
-#include "../include/color.h"
-#include <SDL2/SDL_stdinc.h>
+#include "color.h"
+#include "SDL.h"
 
 Color::Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a):
     r(r), g(g), b(b), a(a) {}

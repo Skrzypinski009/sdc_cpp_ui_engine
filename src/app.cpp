@@ -1,9 +1,8 @@
-#include "../include/app.h"
-#include "../include/utils.h"
-#include "../include/event_manager.h"
+#include "app.h"
+#include "utils.h"
+#include "event_manager.h"
 
-#include <SDL2/SDL_blendmode.h>
-#include <SDL2/SDL_render.h>
+#include "SDL.h"
 
 App::App(){
     root_obj = nullptr;
@@ -49,7 +48,6 @@ void App::stop(){
 void App::loop(){
     
     while(true){
-        draw();
         event_manager.update();
         if(event_manager.exit_signal) 
             return;

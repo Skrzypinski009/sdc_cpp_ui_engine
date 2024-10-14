@@ -1,7 +1,7 @@
-#include "../include/object.h"
-#include "../include/color.h"
-#include "../include/veci2.h"
-#include "../include/rect_style.h"
+#include "object.h"
+#include "color.h"
+#include "veci2.h"
+#include "rect_style.h"
 
 #include <math.h>
 

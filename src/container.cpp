@@ -1,7 +1,7 @@
-#include "../include/container.h"
-#include "../include/color.h"
-#include "../include/object.h"
-#include "../include/veci2.h"
+#include "container.h"
+#include "color.h"
+#include "object.h"
+#include "veci2.h"
 
 
 Container::Container()

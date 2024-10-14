@@ -75,7 +75,8 @@
         "any": "cpp",
         "bitset": "cpp",
         "cfenv": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "sdl_ttf.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

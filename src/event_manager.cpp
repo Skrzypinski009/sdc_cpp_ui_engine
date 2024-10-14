@@ -1,9 +1,9 @@
-#include "../include/event_manager.h"
-#include "../include/utils.h"
-#include "../include/container.h"
+#include "event_manager.h"
+#include "utils.h"
+#include "container.h"
 
 
-#include <SDL2/SDL.h>
+#include "SDL.h"
 
 EventManager::EventManager(){
     exit_signal = false;

@@ -1,13 +1,13 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/object.h"
-#include "../include/color.h"
-#include "../include/container.h"
-#include "../include/fit_container.h"
-#include "../include/label.h"
-#include "../include/app.h"
-#include "../include/rect_style.h"
+#include "object.h"
+#include "color.h"
+#include "container.h"
+#include "fit_container.h"
+#include "label.h"
+#include "app.h"
+#include "rect_style.h"
 
 
 void createObjects(App &app){
@@ -35,9 +35,6 @@ void createObjects(App &app){
         button->setRectStyle(rect_style);
         con->addObject(button);
     }
-
-    
-
 }
 
 
@@ -47,6 +44,7 @@ int main(int argc, char *argv[])
     createObjects(app);
     
     app.start();
+    app.draw();
     app.loop();
     app.stop();
     

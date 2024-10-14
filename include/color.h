@@ -1,6 +1,6 @@
 #pragma once 
 
-#include <SDL2/SDL_stdinc.h>
+#include "SDL.h"
 
 typedef struct Color{
     Uint8 r, g, b, a;

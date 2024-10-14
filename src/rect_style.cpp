@@ -1,7 +1,6 @@
-#include "../include/rect_style.h"
+#include "rect_style.h"
 
-#include <SDL2/SDL_rect.h>
-#include <SDL2/SDL_render.h>
+#include "SDL.h"
 
 RectStyle::RectStyle(SDL_Color background_color, SDL_Color border_color) {
     this->background_color = background_color;

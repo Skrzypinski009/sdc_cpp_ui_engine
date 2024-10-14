@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL_render.h>
+#include "SDL.h"
 #include "color.h"
 #include "veci2.h"
 #include "rect_style.h"

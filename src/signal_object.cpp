@@ -1,4 +1,4 @@
-#include "../include/signal_object.h"
+#include "signal_object.h"
 
 void SignalObject::addSignals(const int signals_){
     signals |= signals_;
