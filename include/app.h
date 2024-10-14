@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <vector>
+
 #include "SDL.h"
 #include "SDL_ttf.h"
 
@@ -9,8 +12,6 @@
 #include "event_manager.h"
 #include "rect_style.h"
 
-#include <iostream>
-#include <vector>
 
 
 struct App{
@@ -25,7 +26,6 @@ struct App{
     void start();
     void stop();
     void loop();
-    void draw();
     void setRootObject(Object* obj);
     void updateRootObject();
     void deleteObject(Object *obj);

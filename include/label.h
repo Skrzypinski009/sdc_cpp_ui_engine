@@ -1,9 +1,10 @@
 #pragma once
 
-#include "object.h"
-
 #include "SDL.h"
 #include "SDL_ttf.h"
+
+#include "object.h"
+
 
 
 class Label : public Object{

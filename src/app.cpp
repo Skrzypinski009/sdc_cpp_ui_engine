@@ -1,8 +1,10 @@
 #include "app.h"
+
+#include "SDL.h"
+
 #include "utils.h"
 #include "event_manager.h"
 
-#include "SDL.h"
 
 App::App(){
     root_obj = nullptr;
@@ -46,7 +48,7 @@ void App::stop(){
 }
 
 void App::loop(){
-    
+    draw();
     while(true){
         event_manager.update();
         if(event_manager.exit_signal) 

@@ -1,13 +1,13 @@
 #pragma once
 
+#include <string>
+
 #include "SDL.h"
+
 #include "color.h"
 #include "veci2.h"
 #include "rect_style.h"
 
-#include <iostream>
-#include <string>
-#include <vector>
 
 enum ObjectType{
     OBJECT = 0,

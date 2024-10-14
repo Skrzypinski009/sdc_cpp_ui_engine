@@ -1,4 +1,5 @@
 #pragma once
+
 #include "object.h"
 
 class SignalObject: public Object{

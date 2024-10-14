@@ -1,10 +1,14 @@
 #include "label.h"
+
+#include <iostream>
+#include <string>
+
+#include "SDL.h"
+#include "SDL_ttf.h"
+
 #include "object.h"
 #include "veci2.h"
 
-#include <string>
-#include "SDL.h"
-#include "SDL_ttf.h"
 
 Label::Label(
     const std::string text_, 

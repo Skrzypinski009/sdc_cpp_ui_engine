@@ -1,10 +1,13 @@
 #include "fit_container.h"
+
+#include <iostream>
+
+#include "SDL.h"
+
 #include "container.h"
 #include "veci2.h"
 #include "object.h"
 
-#include "SDL.h"
-#include <iostream>
 
 FitContainer::FitContainer()
     : Container({0,0}, {100,100}, ObjectType::FIT_CONTAINER) {}

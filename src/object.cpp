@@ -1,9 +1,11 @@
 #include "object.h"
+
+#include <math.h>
+
 #include "color.h"
 #include "veci2.h"
 #include "rect_style.h"
 
-#include <math.h>
 
 Object::Object(){
     type = ObjectType::OBJECT;
@@ -141,7 +143,7 @@ SDL_Rect Object::getClipRect() const {
 }
 
 void Object::draw(SDL_Renderer *renderer){
-    std::cout<<"drawing object\n";
+    // std::cout<<"drawing object\n";
     if(getRectStyle())
         getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
 }
