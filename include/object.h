@@ -44,10 +44,10 @@ public:
     } AlignVertical;
 
     struct {
-        size_t top;
-        size_t right;
-        size_t bottom;
-        size_t left;
+        std::size_t top;
+        std::size_t right;
+        std::size_t bottom;
+        std::size_t left;
     } margin;
 
     Object(const Object &other);
@@ -70,8 +70,8 @@ public:
     // virtual Veci2 getMinSize() const;
     virtual bool getExpand() const;
     virtual bool getFill() const;
-    virtual size_t getAlignH() const;
-    virtual size_t getAlignV() const;
+    virtual std::size_t getAlignH() const;
+    virtual std::size_t getAlignV() const;
     virtual Object* getParent() const;
     virtual RectStyle* getRectStyle() const;
 

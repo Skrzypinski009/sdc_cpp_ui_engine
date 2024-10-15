@@ -1,6 +1,9 @@
-#pragma once
+#ifndef UTILS_H
+#define UTILS_H
 
 #include <vector>
+
+std::size_t findInString(const char* char_str, char c);
 
 template<class T> int findObjectInVector(std::vector<T*> vec, T* object){
     for(int i=0; i<vec.size(); i++){
@@ -11,4 +14,4 @@ template<class T> int findObjectInVector(std::vector<T*> vec, T* object){
     return -1;
 }
 
-size_t findInString(const char* char_str, char c);
+#endif

@@ -114,11 +114,11 @@ bool Object::getFill() const {
     return fill;
 }
 
-size_t Object::getAlignH() const {
+std::size_t Object::getAlignH() const {
     return align_h;
 }
 
-size_t Object::getAlignV() const {
+std::size_t Object::getAlignV() const {
     return align_v;
 }
 

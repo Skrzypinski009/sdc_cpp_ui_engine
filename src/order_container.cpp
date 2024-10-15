@@ -27,7 +27,7 @@ void OrderContainer::addObject(Object *obj){
     updateObjectsPosition();
 }
 
-void OrderContainer::removeAt(const size_t idx){
+void OrderContainer::removeAt(const std::size_t idx){
     Container::removeAt(idx);
     updateObjectsPosition();
 }

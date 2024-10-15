@@ -14,7 +14,7 @@ public:
     void setHorisontal(const bool horisontal_);
 
     void addObject(Object *obj);
-    void removeAt(const size_t idx);
+    void removeAt(const std::size_t idx);
     void updateObjectsHPosition();
     void updateObjectsVPosition();
     void updateObjectsPosition() override;

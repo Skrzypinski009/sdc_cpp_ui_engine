@@ -21,5 +21,5 @@ public:
     void draw(SDL_Renderer *renderer) override;
     static int findObject(std::vector<Object*> objects_, Object* obj);
     void addObject(Object* obj);
-    void removeAt(const size_t idx);
+    void removeAt(const std::size_t idx);
 };

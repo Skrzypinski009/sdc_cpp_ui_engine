@@ -48,7 +48,7 @@ void Container::draw(SDL_Renderer *renderer){
 }
 
 int Container::findObject(std::vector<Object*> objects, Object* object){
-    for(size_t i=0; i<objects.size(); i++){
+    for(std::size_t i=0; i<objects.size(); i++){
         if(object == objects.at(i)){
             return i;
         }
@@ -67,7 +67,7 @@ void Container::addObject(Object* obj){
     }
 }
 
-void Container::removeAt(const size_t idx){
+void Container::removeAt(const std::size_t idx){
     objects[idx]->clearParent();
     objects.erase(objects.begin() + idx);
 }

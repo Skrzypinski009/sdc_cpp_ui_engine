@@ -13,7 +13,7 @@
 Label::Label(
     const std::string text_, 
     const std::string font_path_,
-    const size_t font_size_,
+    const std::size_t font_size_,
     const SDL_Color color_,
     const bool wrapped_
 ) : Object({0,0}, {100, 100}, type=ObjectType::LABEL) {
@@ -52,11 +52,11 @@ std::string Label::getFontPath() const {
     return font_path;
 }
 
-void Label::setFontSize(const size_t font_size_){
+void Label::setFontSize(const std::size_t font_size_){
     font_size = font_size_;
 }
 
-size_t Label::getFontSize() const {
+std::size_t Label::getFontSize() const {
     return font_size;
 }
 

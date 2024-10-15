@@ -51,7 +51,7 @@ Color::Color(const char* hex) : Color(Color::BLACK) {
     Uint8* current_val = &r;
 
     for (int i=1; i<len; i++) {
-        size_t val = findInString(hex_code, hex[i]);
+        std::size_t val = findInString(hex_code, hex[i]);
         if (val == -1) {
             setColor(Color::BLACK); 
             Log::warning("Color hex code char is wrong! Setting color to BLACK.");
