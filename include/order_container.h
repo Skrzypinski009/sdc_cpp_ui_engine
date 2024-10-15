@@ -4,12 +4,12 @@
 #include "container.h"
 #include "veci2.h"
 
-class FitContainer: public Container{
+class OrderContainer: public Container{
 public:
     bool horisontal;
 
-    FitContainer();
-    FitContainer(const Veci2 position_, const Veci2 size_, const int type_=ObjectType::FIT_CONTAINER);
+    OrderContainer();
+    OrderContainer(const Veci2 position_, const Veci2 size_, const int type_=ObjectType::ORDER_CONTAINER);
 
     void setHorisontal(const bool horisontal_);
 

@@ -12,7 +12,7 @@
 enum ObjectType{
     OBJECT = 0,
     CONTAINER,
-    FIT_CONTAINER,
+    ORDER_CONTAINER,
     RECTANGLE,
     LABEL,
     BUTTON
@@ -25,18 +25,30 @@ public:
     int type;
     Veci2 position;
     Veci2 size;
-    Veci2 min_size;
     bool expand;
     bool fill;
-    size_t align;
 
-    enum{
+    int align_h;
+    int align_v;
+
+    typedef enum {
         ALIGN_LEFT,
         ALIGN_RIGHT,
-        ALIGN_TOP,
-        ALIGN_BOTTOM,
         ALIGN_CENTER
-    };
+    } AlignHorizontal;
+
+    typedef enum{
+        ALIGN_TOP = 0,
+        ALIGN_BOTTOM,
+        ALIGN_MIDDLE
+    } AlignVertical;
+
+    struct {
+        size_t top;
+        size_t right;
+        size_t bottom;
+        size_t left;
+    } margin;
 
     Object(const Object &other);
     Object();
@@ -45,19 +57,21 @@ public:
     std::string strType() const;
     virtual void setPosition(const Veci2 position_);
     virtual void setSize(const Veci2 size_);
-    virtual void setMinSize(const Veci2 min_size_); 
+    // virtual void setMinSize(const Veci2 min_size_); 
     virtual void setExpand(const bool expand_);
     virtual void setFill(const bool fill_);
-    virtual void setAlign(const size_t align_);
+    virtual void setAlignH(const int align_h_);
+    virtual void setAlignV(const int align_v_);
     virtual void setParent(Object* object);
     virtual void setRectStyle(RectStyle *rect_style);
 
     virtual Veci2 getPosition() const;
     virtual Veci2 getSize() const;
-    virtual Veci2 getMinSize() const;
+    // virtual Veci2 getMinSize() const;
     virtual bool getExpand() const;
     virtual bool getFill() const;
-    virtual size_t getAlign() const;
+    virtual size_t getAlignH() const;
+    virtual size_t getAlignV() const;
     virtual Object* getParent() const;
     virtual RectStyle* getRectStyle() const;
 

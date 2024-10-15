@@ -71,7 +71,7 @@ void EventManager::registerAllButtons(Object* obj){
 }
 
 void EventManager::scanObjectForButtons(Object* obj){
-    if(obj->type == ObjectType::CONTAINER || obj->type == ObjectType::FIT_CONTAINER){
+    if(obj->type == ObjectType::CONTAINER || obj->type == ObjectType::ORDER_CONTAINER){
         Container* con = (Container*)obj;
         for(int i = con->objects.size()-1; i>-1; i--){
             scanObjectForButtons(con->objects[i]);

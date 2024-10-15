@@ -6,8 +6,9 @@
 #include "event_manager.h"
 
 
-App::App(){
+App::App(Veci2 window_size_){
     root_obj = nullptr;
+    window_size = window_size_;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         throw "SDL Video Error";
@@ -20,7 +21,7 @@ App::App(){
         "APP",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        800, 600, 
+        window_size.x, window_size.y, 
         SDL_WINDOW_SHOWN //| SDL_WINDOW_RESIZABLE
     );
     
@@ -48,8 +49,8 @@ void App::stop(){
 }
 
 void App::loop(){
-    draw();
     while(true){
+        draw();
         event_manager.update();
         if(event_manager.exit_signal) 
             return;
@@ -79,7 +80,7 @@ void App::updateRootObject(){
 }
 
 void App::deleteObject(Object *obj){
-    if(obj->type == ObjectType::CONTAINER || obj->type == ObjectType::FIT_CONTAINER){
+    if(obj->type == ObjectType::CONTAINER || obj->type == ObjectType::ORDER_CONTAINER){
         for(Object *child : ((Container*)obj)->objects){
             deleteObject(child);
         }

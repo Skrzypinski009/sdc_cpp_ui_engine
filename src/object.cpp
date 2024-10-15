@@ -10,35 +10,41 @@
 Object::Object(){
     type = ObjectType::OBJECT;
     setPosition(Veci2(0,0));
-    setMinSize(Veci2(0,0));
+    // setMinSize(Veci2(0,0));
     setSize(Veci2(0,0));
     setParent(nullptr);
     setRectStyle(nullptr);
+    setAlignH(ALIGN_LEFT);
+    setAlignV(ALIGN_TOP);
 }
 
 Object::Object(const Veci2 position_, const Veci2 size_, const int type_){
     type = type_;
     setPosition(position_);
-    setMinSize(Veci2(0,0));
+    // setMinSize(Veci2(0,0));
     setSize(size_);
     setParent(nullptr);
     setRectStyle(nullptr);
+    setAlignH(ALIGN_LEFT);
+    setAlignV(ALIGN_TOP);
 }
 
 Object::Object(const Object &other){
     type = other.type;
     setPosition(other.getPosition());
     setSize(other.getSize());
-    setMinSize(other.getMinSize());
+    // setMinSize(other.getMinSize());
     setParent(nullptr);
-    setRectStyle(nullptr);
+    setRectStyle(other.rect_style);
+    setAlignH(other.align_h);
+    setAlignV(other.align_v);
 }
 
 std::string Object::strType() const {
     std::string names[] = {
         "OBJECT",
         "CONTAINER",
-        "FIT_CONTAINER",
+        "ORDER_CONTAINER",
         "RECTANGLE",
         "LABEL",
         "BUTTON"
@@ -51,15 +57,16 @@ void Object::setPosition(const Veci2 position_){
 }
 
 void Object::setSize(const Veci2 size_){
-    size.x = std::max(size_.x, min_size.x);
-    size.y = std::max(size_.y, min_size.y);
+    // size.x = std::max(size_.x, min_size.x);
+    // size.y = std::max(size_.y, min_size.y);
+    size = size_;
 }
 
-void Object::setMinSize(const Veci2 min_size_){
-    min_size = min_size_;
-    size.x = std::max(size.x, min_size.x);
-    size.y = std::max(size.y, min_size.y);
-}
+// void Object::setMinSize(const Veci2 min_size_){
+//     min_size = min_size_;
+//     size.x = std::max(size.x, min_size.x);
+//     size.y = std::max(size.y, min_size.y);
+// }
 
 void Object::setExpand(const bool expand_){
     expand = expand_;
@@ -69,8 +76,12 @@ void Object::setFill(const bool fill_){
     fill = fill_;
 }
 
-void Object::setAlign(const size_t align_){
-    align = align_;
+void Object::setAlignH(const int align_h_){
+    align_h = align_h_;
+}
+
+void Object::setAlignV(const int align_v_){
+    align_v = align_v_;
 }
 
 void Object::setParent(Object* object_){
@@ -91,9 +102,9 @@ Veci2 Object::getSize() const {
     return size;
 }
 
-Veci2 Object::getMinSize() const {
-    return min_size;
-}
+// Veci2 Object::getMinSize() const {
+//     return min_size;
+// }
 
 bool Object::getExpand() const {
     return expand;
@@ -103,8 +114,12 @@ bool Object::getFill() const {
     return fill;
 }
 
-size_t Object::getAlign() const {
-    return align;
+size_t Object::getAlignH() const {
+    return align_h;
+}
+
+size_t Object::getAlignV() const {
+    return align_v;
 }
 
 Object* Object::getParent() const {

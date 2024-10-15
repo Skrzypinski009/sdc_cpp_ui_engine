@@ -10,7 +10,7 @@ Button::Button(const Veci2 position_, const Veci2 size_)
 
 Button::Button(const Button &other) 
     : Object(other.getPosition(), other.getSize(), other.type) {
-    setMinSize(other.getMinSize());
+    // setMinSize(other.getMinSize());
 }
 
 void Button::setPressed(const bool pressed_){

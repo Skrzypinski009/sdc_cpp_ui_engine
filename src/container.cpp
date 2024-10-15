@@ -12,6 +12,14 @@ Container::Container(const Veci2 position_, const Veci2 size_, const int type_)
     : Object(position_, size_, type_) {}
 
 
+void Container::setClip(bool clip_) {
+    clip = clip_;
+}
+
+bool Container::getClip() const {
+    return clip;
+}
+
 void Container::setSize(const Veci2 size_){
     Object::setSize(size_);
     updateObjectsPosition();
@@ -25,14 +33,15 @@ void Container::updateObjectsPosition(){
         }
 }
 
-
 void Container::draw(SDL_Renderer *renderer){
     if(getRectStyle())
         getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
-    
+
     SDL_Rect clip_rect = getClipRect();
+
     for(Object* obj: objects){
-        SDL_RenderSetClipRect(renderer, &clip_rect);
+        if (clip)
+            SDL_RenderSetClipRect(renderer, &clip_rect);
         obj->draw(renderer);
     }
     SDL_RenderSetClipRect(renderer, NULL);

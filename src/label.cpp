@@ -84,7 +84,7 @@ void Label::loadFont(){
 }
 
 void Label::draw(SDL_Renderer *renderer){
-    std::cout<<"drawing label"<<std::endl;
+    // std::cout<<"drawing label"<<std::endl;
     if(getRectStyle())
         getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
 
