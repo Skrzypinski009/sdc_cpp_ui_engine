@@ -2,7 +2,7 @@
 
 #include "SDL.h"
 
-RectStyle::RectStyle(SDL_Color background_color, SDL_Color border_color) {
+RectStyle::RectStyle(Color background_color, Color border_color) {
     this->background_color = background_color;
     this->border_color = border_color;
 }

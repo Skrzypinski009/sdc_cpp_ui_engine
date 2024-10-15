@@ -10,3 +10,5 @@ template<class T> int findObjectInVector(std::vector<T*> vec, T* object){
     }
     return -1;
 }
+
+size_t findInString(const char* char_str, char c);
