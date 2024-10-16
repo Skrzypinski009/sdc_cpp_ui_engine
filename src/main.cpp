@@ -9,24 +9,27 @@
 #include "app.h"
 #include "rect_style.h"
 #include "log.h"
+#include "style_manager.h"
+
+void registerStyles() {
+    RectStyle *black_white = new RectStyle({Color("#000"), Color("#FFF")});
+    StyleManager::addStyle("BlackWhite", black_white);
+    RectStyle *gray = new RectStyle({40,40,40, 255}, {0,0,0,0});
+    StyleManager::addStyle("Gray", gray);
+    Log::print(StyleManager::styles);
+}
 
 
 void createObjects(App &app){
-    // rect_style
-    RectStyle *rect_style = new RectStyle({Color("#000"), Color("#FFF")});
-    app.register_style(rect_style);
-    RectStyle *rect_style2 = new RectStyle({40,40,40, 255}, {0,0,0,0});
-    app.register_style(rect_style2);
-
     Container *con = new Container;
-    con->setRectStyle(rect_style);
+    con->setStyle("BlackWhite");
     app.root_obj = con;
     
     OrderContainer *or_con = new OrderContainer;
     {
         or_con->setPosition({300, 140});
         or_con->setSize({300, 400});
-        or_con->setRectStyle(rect_style2);
+        or_con->setStyle("Gray");
         con->addObject(or_con);
     }
 
@@ -44,7 +47,7 @@ void createObjects(App &app){
     
     { //button
         Button *button = new Button(Veci2(200, 200), Veci2(200,200));
-        button->setRectStyle(rect_style);
+        button->setStyle("BlackWhite");
         button->setAlignH(Object::ALIGN_CENTER);
         or_con->addObject(button);
     }
@@ -54,12 +57,13 @@ void createObjects(App &app){
 int main(int argc, char *argv[])
 {
     App app({1280, 720});
+    registerStyles();
     createObjects(app);
     
     app.start();
     app.loop();
     app.stop();
     
-    
+    StyleManager::clearStyles();
     return 0;
 }

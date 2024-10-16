@@ -64,6 +64,7 @@ public:
     virtual void setAlignV(const int align_v_);
     virtual void setParent(Object* object);
     virtual void setRectStyle(RectStyle *rect_style);
+    virtual void setStyle(const std::string);
 
     virtual Veci2 getPosition() const;
     virtual Veci2 getSize() const;

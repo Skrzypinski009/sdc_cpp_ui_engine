@@ -5,6 +5,7 @@
 #include "color.h"
 #include "veci2.h"
 #include "rect_style.h"
+#include "style_manager.h"
 
 
 Object::Object(){
@@ -91,6 +92,11 @@ void Object::setParent(Object* object_){
 void Object::setRectStyle(RectStyle *rect_style_){
     rect_style = rect_style_;
 }
+
+void Object::setStyle(const std::string key){
+    rect_style = StyleManager::getStyle(key);
+}
+
 
 // getters
 

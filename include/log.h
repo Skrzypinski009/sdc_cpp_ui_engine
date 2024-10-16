@@ -1,8 +1,10 @@
 #pragma once
 
 #include <string>
+#include <map>
 
 #include "color.h"
+#include "rect_style.h"
 
 class Log {
 public:
@@ -20,6 +22,7 @@ public:
     static void print(const int); 
     static void print(const float);
     static void print(const Color);
+    static void print(std::map<std::string, RectStyle*>);
 
     static void info(const char*);
     static void warning(const char*);
