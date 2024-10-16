@@ -21,6 +21,7 @@ enum ObjectType{
 class Object{
     Object* parent;
     RectStyle *rect_style;
+    std::string name;
 public:
     int type;
     Veci2 position;
@@ -65,6 +66,7 @@ public:
     virtual void setParent(Object* object);
     virtual void setRectStyle(RectStyle *rect_style);
     virtual void setStyle(const std::string);
+    virtual void setName(const std::string);
 
     virtual Veci2 getPosition() const;
     virtual Veci2 getSize() const;
@@ -75,6 +77,7 @@ public:
     virtual std::size_t getAlignV() const;
     virtual Object* getParent() const;
     virtual RectStyle* getRectStyle() const;
+    virtual std::string getName() const;
 
     virtual void clearParent();
     virtual Veci2 getGlobalPosition() const;

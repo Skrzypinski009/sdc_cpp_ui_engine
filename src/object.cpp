@@ -5,8 +5,10 @@
 #include "color.h"
 #include "veci2.h"
 #include "rect_style.h"
-#include "style_manager.h"
+#include "log.h"
 
+#include "style_manager.h"
+#include "object_manager.h"
 
 Object::Object(){
     type = ObjectType::OBJECT;
@@ -97,6 +99,21 @@ void Object::setStyle(const std::string key){
     rect_style = StyleManager::getStyle(key);
 }
 
+void Object::setName(const std::string name_){
+    if (name != "") {
+        Log::error("Object already has it's name! You canno't change it");
+        return;
+    }
+    if (ObjectManager::hasObject(name_)) {
+        Log::error("Object with that name already exist!");
+        return;
+    }
+    name = name_;
+    ObjectManager::addObject(name, this);
+}
+std::string Object::getName() const {
+    return name;
+}
 
 // getters
 

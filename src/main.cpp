@@ -9,7 +9,15 @@
 #include "app.h"
 #include "rect_style.h"
 #include "log.h"
+
 #include "style_manager.h"
+#include "signal_manager.h"
+#include "object_manager.h"
+
+App app({1280, 720});
+
+
+
 
 void registerStyles() {
     RectStyle *black_white = new RectStyle({Color("#000"), Color("#FFF")});
@@ -17,6 +25,11 @@ void registerStyles() {
     RectStyle *gray = new RectStyle({40,40,40, 255}, {0,0,0,0});
     StyleManager::addStyle("Gray", gray);
     Log::print(StyleManager::styles);
+}
+
+void on_button_pressed(){
+    Button* b1 = (Button*) ObjectManager::getObject("button1");
+    b1->setSize(Veci2(30,30));
 }
 
 
@@ -50,13 +63,16 @@ void createObjects(App &app){
         button->setStyle("BlackWhite");
         button->setAlignH(Object::ALIGN_CENTER);
         or_con->addObject(button);
+        button->setName("button1");
     }
+
+    SignalManager::connect("button_pressed", on_button_pressed);
 }
 
 
 int main(int argc, char *argv[])
 {
-    App app({1280, 720});
+    
     registerStyles();
     createObjects(app);
     

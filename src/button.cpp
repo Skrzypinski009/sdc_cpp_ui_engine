@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "signal_manager.h"
+
 Button::Button() 
     : Object({0,0}, {100,100}, ObjectType::BUTTON) {}
 
@@ -18,6 +20,7 @@ void Button::setPressed(const bool pressed_){
     if(pressed){
         just_pressed = true;
         std::cout<<"button_pressed"<<std::endl;
+        SignalManager::emitSignal("button_pressed");
     } else {
         std::cout<<"button_released"<<std::endl;
     }
