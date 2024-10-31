@@ -86,4 +86,13 @@ public:
 
     virtual void draw(SDL_Renderer *renderer);
     virtual void onLoopUpdate() {}
+
+    virtual void emitSignal(std::string signal_name);
+    virtual void connect(std::string signal_name, void (*func)(Object*));
 };
+
+/*
+    (object_ptr, signal_name, signal_args?)
+
+
+*/

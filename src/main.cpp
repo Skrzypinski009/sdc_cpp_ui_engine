@@ -27,11 +27,15 @@ void registerStyles() {
     Log::print(StyleManager::styles);
 }
 
-void on_button_pressed(){
-    Button* b1 = (Button*) ObjectManager::getObject("button1");
+void on_button_pressed(Object* sender){
+    Button* b1 = (Button*)sender;
     b1->setSize(Veci2(30,30));
 }
 
+void on_button_released(Object* sender){
+    Button* b1 = (Button*)sender;
+    b1->setSize(Veci2(200,200));
+}
 
 void createObjects(App &app){
     Container *con = new Container;
@@ -64,9 +68,9 @@ void createObjects(App &app){
         button->setAlignH(Object::ALIGN_CENTER);
         or_con->addObject(button);
         button->setName("button1");
+        button->connect("button_pressed", on_button_pressed);
+        button->connect("button_released", on_button_released);
     }
-
-    SignalManager::connect("button_pressed", on_button_pressed);
 }
 
 

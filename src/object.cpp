@@ -9,6 +9,7 @@
 
 #include "style_manager.h"
 #include "object_manager.h"
+#include "signal_manager.h"
 
 Object::Object(){
     type = ObjectType::OBJECT;
@@ -185,4 +186,20 @@ void Object::draw(SDL_Renderer *renderer){
     if(getRectStyle())
         getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
 }
+
+void Object::emitSignal(std::string signal_name)
+{
+    SignalManager::emitSignal(this, signal_name);
+}
+
+void Object::connect(std::string signal_name, void (*func)(Object*))
+{
+    SignalManager::connect(this, signal_name, func);
+}
+
+// void Object::PositionChanged()
+// {
+
+// }
+
 
