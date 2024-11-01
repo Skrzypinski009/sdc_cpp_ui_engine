@@ -61,13 +61,14 @@ void Container::addObject(Object* obj){
         throw "Adding Object to Container, multiple times";
     objects.push_back(obj);
     obj->setParent(this);
-    if(obj->fill){
-        obj->setPosition({0,0});
-        obj->setSize(size);
-    }
+    updateObjectsPosition();
 }
 
 void Container::removeAt(const std::size_t idx){
     objects[idx]->clearParent();
     objects.erase(objects.begin() + idx);
+}
+
+void Container::update(){
+    updateObjectsPosition();
 }

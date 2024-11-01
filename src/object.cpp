@@ -65,6 +65,7 @@ void Object::setSize(const Veci2 size_){
     // size.x = std::max(size_.x, min_size.x);
     // size.y = std::max(size_.y, min_size.y);
     size = size_;
+    updateParent();
 }
 
 // void Object::setMinSize(const Veci2 min_size_){
@@ -75,18 +76,22 @@ void Object::setSize(const Veci2 size_){
 
 void Object::setExpand(const bool expand_){
     expand = expand_;
+    updateParent();
 }
 
 void Object::setFill(const bool fill_){
     fill = fill_;
+    updateParent();
 }
 
 void Object::setAlignH(const int align_h_){
     align_h = align_h_;
+    updateParent();
 }
 
 void Object::setAlignV(const int align_v_){
     align_v = align_v_;
+    updateParent();
 }
 
 void Object::setParent(Object* object_){
@@ -188,16 +193,26 @@ void Object::draw(SDL_Renderer *renderer){
         getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
 }
 
-void Object::emitSignal(std::string signal_name)
+void Object::update() {}
+
+void Object::updateParent()
 {
-    SignalManager::emitSignal(this, signal_name);
+    if (parent == nullptr) return;
+    parent->update();
 }
 
-void Object::connect(std::string signal_name, void (*func)(Object*))
-{
-    SignalManager::connect(this, signal_name, func);
-}
+// ------- Methods for Signal Manger
 
+    void Object::emitSignal(std::string signal_name)
+    {
+        SignalManager::emitSignal(this, signal_name);
+    }
+
+    void Object::connect(std::string signal_name, void (*func)(Object*))
+    {
+        SignalManager::connect(this, signal_name, func);
+    }
+// ----------------------------
 
 // Old Object Manager
     std::map<std::string, Object*> Object::objects = {};

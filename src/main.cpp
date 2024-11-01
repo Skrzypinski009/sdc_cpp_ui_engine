@@ -34,7 +34,6 @@ void on_button_pressed(Object* sender){
 void on_button_released(Object* sender){
     Button* b1 = (Button*)sender;
     b1->setSize(Veci2(200,200));
-    Object::getObject("label1")->setSize(Veci2(10,10));
 }
 
 void createObjects(App &app){
@@ -50,19 +49,6 @@ void createObjects(App &app){
         con->addObject(or_con);
     }
 
-    { //label
-        Label *label = new Label("Hey, what's up?",
-            "../fonts/SourceCodePro-Regular.ttf",
-            20, {255,255,255}, true);
-        label->loadFont();
-        label->setPosition({100,100});
-        label->setSize({200, 30});
-        label->setAlignH(Object::ALIGN_CENTER);
-        // label->setRectStyle(rect_style);
-        label->setName("label1");
-        or_con->addObject(label);
-    }
-    
     { //button
         Button *button = new Button(Veci2(200, 200), Veci2(200,200));
         button->setStyle("BlackWhite");
@@ -72,6 +58,19 @@ void createObjects(App &app){
         button->connect("button_pressed", on_button_pressed);
         button->connect("button_released", on_button_released);
     }
+
+    { //label
+        Label *label = new Label("Hey, what's up?",
+            "../fonts/SourceCodePro-Regular.ttf",
+            20, {255,255,255}, true);
+        label->loadFont();
+        label->setPosition({100,100});
+        label->setSize({200, 30});
+        label->setAlignH(Object::ALIGN_CENTER);
+        // label->setRectStyle(rect_style);
+        or_con->addObject(label);
+    }
+    
 }
 
 
