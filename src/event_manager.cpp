@@ -8,7 +8,6 @@
 
 EventManager::EventManager(){
     exit_signal = false;
-
 }
 
 

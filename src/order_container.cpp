@@ -12,7 +12,7 @@
 OrderContainer::OrderContainer()
     : Container({0,0}, {100,100}, ObjectType::ORDER_CONTAINER) {}
 
-OrderContainer::OrderContainer(const Veci2 position_, const Veci2 size_, const int type_)
+OrderContainer::OrderContainer(const Vec2 position_, const Vec2 size_, const int type_)
     : Container(position_, size_, type_) {}
 
 void OrderContainer::setHorisontal(const bool horisontal_){
@@ -33,34 +33,34 @@ void OrderContainer::removeAt(const std::size_t idx){
 }
 
 void OrderContainer::updateObjectsHPosition() {
-    int next_x = 0;
+    float next_x = 0;
     for (Object* object: objects) {
         switch(object->getAlignV()){
             case ALIGN_TOP:
-                object->setPosition({next_x, 0});
+                object->setPosition(Vec2(next_x, 0.));
                 break;
             case ALIGN_MIDDLE:
-                object->setPosition({next_x, getSize().y / 2 - object->getSize().y / 2});
+                object->setPosition(Vec2(next_x, getSize().y / 2 - object->getSize().y / 2));
                 break;
             case ALIGN_BOTTOM:
-                object->setPosition({next_x, getSize().y - object->getSize().y});
+                object->setPosition(Vec2(next_x, getSize().y - object->getSize().y));
         }
         next_x += object->getSize().x;
     }
 }
 
 void OrderContainer::updateObjectsVPosition() {
-    int next_y = 0;
+    float next_y = 0.;
     for (Object* object: objects) {
         switch(object->getAlignH()){
             case ALIGN_LEFT:
-                object->setPosition({0, next_y});
+                object->setPosition(Vec2(0., next_y));
                 break;
             case ALIGN_CENTER:
-                object->setPosition({getSize().x / 2 - object->getSize().x / 2, next_y});
+                object->setPosition(Vec2(getSize().x / 2. - object->getSize().x / 2., next_y));
                 break;
             case ALIGN_RIGHT:
-                object->setPosition({getSize().x - object->getSize().x, next_y});
+                object->setPosition(Vec2(getSize().x - object->getSize().x, next_y));
         }
         next_y += object->getSize().y;
     }

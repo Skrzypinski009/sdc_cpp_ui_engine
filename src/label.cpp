@@ -95,7 +95,7 @@ void Label::draw(SDL_Renderer *renderer){
     SDL_Surface *text_surface;
 
     if(wrapped)
-        text_surface = TTF_RenderText_Blended_Wrapped(text_font, text.c_str(), color, getSize().x);
+        text_surface = TTF_RenderText_Blended_Wrapped(text_font, text.c_str(), color, (int)getSize().x);
     else
         text_surface = TTF_RenderText_Blended(text_font, text.c_str(), color);
 
@@ -103,7 +103,7 @@ void Label::draw(SDL_Renderer *renderer){
         std::cout << "Failed to render text: " << TTF_GetError() << std::endl;
     }
     SDL_Texture *text_texture = SDL_CreateTextureFromSurface( renderer, text_surface );
-    SDL_Rect rect = {getGlobalPosition().x, getGlobalPosition().y, text_surface->w, text_surface->h};
+    SDL_Rect rect = {(int)getGlobalPosition().x, (int)getGlobalPosition().y, text_surface->w, text_surface->h};
     SDL_Rect clip_rect = getClipRect();
     SDL_RenderSetClipRect(renderer, &clip_rect);
     SDL_RenderCopy(renderer, text_texture, NULL, &rect);

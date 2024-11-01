@@ -28,19 +28,27 @@ void registerStyles() {
 
 void on_button_pressed(Object* sender){
     Button* b = (Button*) sender;
-    b->setSize(Veci2(30,30));
+    b->setSize(Vec2(30,30));
 }
 
 void on_button_released(Object* sender){
     Button* b = (Button*) sender;
-    b->setSize(Veci2(200,200));
+    b->setSize(Vec2(200,200));
 }
 
-void on_button_loop(Object* object, float delta){
-    Button* b = (Button*) object;
-    Veci2 bs = object->getSize();
-    if(bs.x > 50)
-        b->setSize(Veci2(bs.x -1, bs.y-1));
+void on_button_loop(Object* obj, float delta){
+    // Button* b = (Button*) object;
+    // Vec2 bs = object->getSize();
+    // float speed = delta * 30;
+    // if(bs.x > 50)
+        // b->setSize(Vec2(bs.x - speed, bs.y - speed));
+    Veci2 m_pos;
+    Vec2 o_pos = obj->getPosition();
+    Vec2 o_size = obj->getSize();
+    SDL_GetMouseState(&m_pos.x, &m_pos.y);
+    Vec2 pos_delta = Vec2(m_pos) - (o_pos + Vec2(o_size.x/2, o_size.y/2));
+    float speed = delta * 2;
+    obj->setPosition(Vec2(o_pos.x + pos_delta.x * speed, o_pos.y + pos_delta.y * speed));
 }
 
 void createObjects(App &app){
@@ -64,7 +72,7 @@ void createObjects(App &app){
         button->connect("button_pressed", on_button_pressed);
         button->connect("button_released", on_button_released);
         button->setLoopFunction(on_button_loop);
-        or_con->addObject(button);
+        con->addObject(button);
     }
 
     { //label
@@ -78,7 +86,6 @@ void createObjects(App &app){
         // label->setRectStyle(rect_style);
         or_con->addObject(label);
     }
-    
 }
 
 

@@ -7,7 +7,7 @@
 Button::Button() 
     : Object({0,0}, {100,100}, ObjectType::BUTTON) {}
 
-Button::Button(const Veci2 position_, const Veci2 size_) 
+Button::Button(const Vec2 position_, const Vec2 size_) 
     : Object(position_, size_, ObjectType::BUTTON) {}
 
 Button::Button(const Button &other) 
@@ -54,8 +54,8 @@ bool Button::isJustPressed() const {
 
 
 bool Button::pressedCheck(const Veci2 click_pos) const {
-    Veci2 start_pos = getGlobalPosition();
-    Veci2 end_pos = start_pos + size;
+    Veci2 start_pos = Veci2(getGlobalPosition());
+    Veci2 end_pos = start_pos + Veci2(size);
     if(
         click_pos.x > start_pos.x && 
         click_pos.y > start_pos.y &&

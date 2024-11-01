@@ -11,12 +11,12 @@ public:
     bool clip;
 
     Container();
-    Container(const Veci2 position_, const Veci2 size_, const int type_ = ObjectType::CONTAINER);
+    Container(const Vec2 position_, const Vec2 size_, const int type_ = ObjectType::CONTAINER);
     
     void setClip(bool clip_);
     bool getClip() const;
 
-    void setSize(const Veci2 size_) override;
+    void setSize(const Vec2 size_) override;
     virtual void updateObjectsPosition();
     void draw(SDL_Renderer *renderer) override;
     static int findObject(std::vector<Object*> objects_, Object* obj);

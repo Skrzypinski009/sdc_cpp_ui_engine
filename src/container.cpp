@@ -8,8 +8,8 @@
 Container::Container()
     : Object({0,0}, {100, 100}, ObjectType::CONTAINER) {}
 
-Container::Container(const Veci2 position_, const Veci2 size_, const int type_)
-    : Object(position_, size_, type_) {}
+Container::Container(const Vec2 position_, const Vec2 size_, const int type_)
+    : Object(position_, size_, type_), clip(false) {}
 
 
 void Container::setClip(bool clip_) {
@@ -20,7 +20,7 @@ bool Container::getClip() const {
     return clip;
 }
 
-void Container::setSize(const Veci2 size_){
+void Container::setSize(const Vec2 size_){
     Object::setSize(size_);
     updateObjectsPosition();
 }
@@ -34,8 +34,7 @@ void Container::updateObjectsPosition(){
 }
 
 void Container::draw(SDL_Renderer *renderer){
-    if(getRectStyle())
-        getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
+    Object::draw(renderer);
 
     SDL_Rect clip_rect = getClipRect();
 

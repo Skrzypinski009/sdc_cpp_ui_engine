@@ -14,9 +14,9 @@
 
 Object::Object(){
     type = ObjectType::OBJECT;
-    setPosition(Veci2(0,0));
-    // setMinSize(Veci2(0,0));
-    setSize(Veci2(0,0));
+    setPosition(Vec2(0,0));
+    // setMinSize(Vec2(0,0));
+    setSize(Vec2(0,0));
     setParent(nullptr);
     setRectStyle(nullptr);
     setAlignH(ALIGN_LEFT);
@@ -24,10 +24,10 @@ Object::Object(){
     loop_function = nullptr;
 }
 
-Object::Object(const Veci2 position_, const Veci2 size_, const int type_){
+Object::Object(const Vec2 position_, const Vec2 size_, const int type_){
     type = type_;
     setPosition(position_);
-    // setMinSize(Veci2(0,0));
+    // setMinSize(Vec2(0,0));
     setSize(size_);
     setParent(nullptr);
     setRectStyle(nullptr);
@@ -60,18 +60,18 @@ std::string Object::strType() const {
     return names[type];
 }
 
-void Object::setPosition(const Veci2 position_){
+void Object::setPosition(const Vec2 position_){
     position = position_;
 }
 
-void Object::setSize(const Veci2 size_){
+void Object::setSize(const Vec2 size_){
     // size.x = std::max(size_.x, min_size.x);
     // size.y = std::max(size_.y, min_size.y);
     size = size_;
     updateParent();
 }
 
-// void Object::setMinSize(const Veci2 min_size_){
+// void Object::setMinSize(const Vec2 min_size_){
 //     min_size = min_size_;
 //     size.x = std::max(size.x, min_size.x);
 //     size.y = std::max(size.y, min_size.y);
@@ -132,15 +132,15 @@ void Object::setLoopFunction(void (*loop_func)(Object*, float)){
 
 // getters
 
-Veci2 Object::getPosition() const {
+Vec2 Object::getPosition() const {
     return position;
 }
 
-Veci2 Object::getSize() const {
+Vec2 Object::getSize() const {
     return size;
 }
 
-// Veci2 Object::getMinSize() const {
+// Vec2 Object::getMinSize() const {
 //     return min_size;
 // }
 
@@ -174,7 +174,7 @@ void Object::clearParent(){
     this->parent = nullptr;
 }
 
-Veci2 Object::getGlobalPosition() const {
+Vec2 Object::getGlobalPosition() const {
     if(parent){
         return getPosition() + parent->getGlobalPosition();
     }
@@ -184,12 +184,12 @@ Veci2 Object::getGlobalPosition() const {
 
 SDL_Rect Object::getClipRect() const {
     if(!parent)
-        return {getPosition().x, getPosition().y, getSize().x, getSize().y};
+        return {(int)getPosition().x, (int)getPosition().y, (int)getSize().x, (int)getSize().y};
     SDL_Rect clip_rect;
-    clip_rect.x = std::max(getGlobalPosition().x, parent->getGlobalPosition().x);
-    clip_rect.y = std::max(getGlobalPosition().y, parent->getGlobalPosition().y);
-    clip_rect.w = std::min(getGlobalPosition().x + getSize().x, parent->getGlobalPosition().x + parent->getSize().x) - clip_rect.x;
-    clip_rect.h = std::min(getGlobalPosition().y + getSize().y, parent->getGlobalPosition().y + parent->getSize().y) - clip_rect.y;
+    clip_rect.x = (int)std::max(getGlobalPosition().x, parent->getGlobalPosition().x);
+    clip_rect.y = (int)std::max(getGlobalPosition().y, parent->getGlobalPosition().y);
+    clip_rect.w = (int)std::min(getGlobalPosition().x + getSize().x, parent->getGlobalPosition().x + parent->getSize().x) - clip_rect.x;
+    clip_rect.h = (int)std::min(getGlobalPosition().y + getSize().y, parent->getGlobalPosition().y + parent->getSize().y) - clip_rect.y;
     if(clip_rect.w < 0 || clip_rect.h < 0)
         return {0,0,0,0};
     return clip_rect;
@@ -198,7 +198,7 @@ SDL_Rect Object::getClipRect() const {
 void Object::draw(SDL_Renderer *renderer){
     // std::cout<<"drawing object\n";
     if(getRectStyle())
-        getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
+        getRectStyle()->draw(renderer, Veci2(getGlobalPosition()), Veci2(getSize()));
 }
 
 void Object::onLoopUpdate(float delta) {

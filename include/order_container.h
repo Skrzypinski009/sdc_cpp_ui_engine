@@ -9,7 +9,7 @@ public:
     bool horisontal;
 
     OrderContainer();
-    OrderContainer(const Veci2 position_, const Veci2 size_, const int type_=ObjectType::ORDER_CONTAINER);
+    OrderContainer(const Vec2 position_, const Vec2 size_, const int type_=ObjectType::ORDER_CONTAINER);
 
     void setHorisontal(const bool horisontal_);
 

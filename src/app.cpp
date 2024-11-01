@@ -98,8 +98,8 @@ void App::updateRootObject(){
     if(root_obj){
         int w, h;
         SDL_GetWindowSize(window, &w, &h);
-        root_obj->setSize({w,h});
-        root_obj->setPosition({0,0});
+        root_obj->setSize(Vec2(w,h));
+        root_obj->setPosition(Vec2(0,0));
     }
 }
 

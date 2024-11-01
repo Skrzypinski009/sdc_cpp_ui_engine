@@ -11,7 +11,7 @@ class Button: public Object{
 public:
     Button(const Button &other);
     Button();
-    Button(const Veci2 position_, const Veci2 size_);
+    Button(const Vec2 position_, const Vec2 size_);
 
     void setPressed(const bool pressed_);
     bool isPressed() const;

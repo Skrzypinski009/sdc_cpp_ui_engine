@@ -8,6 +8,7 @@
 
 #include "color.h"
 #include "veci2.h"
+#include "vec2.h"
 #include "rect_style.h"
 
 
@@ -28,8 +29,8 @@ class Object{
     void (*loop_function)(Object*, float);
 public:
     int type;
-    Veci2 position;
-    Veci2 size;
+    Vec2 position;
+    Vec2 size;
     bool expand;
     bool fill;
 
@@ -57,12 +58,12 @@ public:
 
     Object(const Object &other);
     Object();
-    Object(const Veci2 position_, const Veci2 size_, const int type_=ObjectType::OBJECT);
+    Object(const Vec2 position_, const Vec2 size_, const int type_=ObjectType::OBJECT);
 
     std::string strType() const;
-    virtual void setPosition(const Veci2 position_);
-    virtual void setSize(const Veci2 size_);
-    // virtual void setMinSize(const Veci2 min_size_); 
+    virtual void setPosition(const Vec2 position_);
+    virtual void setSize(const Vec2 size_);
+    // virtual void setMinSize(const Vec2 min_size_); 
     virtual void setExpand(const bool expand_);
     virtual void setFill(const bool fill_);
     virtual void setAlignH(const int align_h_);
@@ -73,9 +74,9 @@ public:
     virtual void setName(const std::string);
     virtual void setLoopFunction(void (*loop_func)(Object*, float));
 
-    virtual Veci2 getPosition() const;
-    virtual Veci2 getSize() const;
-    // virtual Veci2 getMinSize() const;
+    virtual Vec2 getPosition() const;
+    virtual Vec2 getSize() const;
+    // virtual Vec2 getMinSize() const;
     virtual bool getExpand() const;
     virtual bool getFill() const;
     virtual std::size_t getAlignH() const;
@@ -85,7 +86,7 @@ public:
     virtual std::string getName() const;
 
     virtual void clearParent();
-    virtual Veci2 getGlobalPosition() const;
+    virtual Vec2 getGlobalPosition() const;
     
     SDL_Rect getClipRect() const;
 
