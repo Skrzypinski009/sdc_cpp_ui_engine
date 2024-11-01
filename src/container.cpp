@@ -69,6 +69,13 @@ void Container::removeAt(const std::size_t idx){
     objects.erase(objects.begin() + idx);
 }
 
+void Container::onLoopUpdate(float delta)
+{
+    for (Object* object : objects)
+        object->onLoopUpdate(delta);
+    Object::onLoopUpdate(delta);
+}
+
 void Container::update(){
     updateObjectsPosition();
 }

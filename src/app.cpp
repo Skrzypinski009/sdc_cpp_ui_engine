@@ -1,10 +1,13 @@
 #include "app.h"
 
+#include <chrono>
+
 #include "SDL.h"
 
 #include "utils.h"
 #include "event_manager.h"
 
+namespace ch = std::chrono;
 
 App::App(Veci2 window_size_){
     root_obj = nullptr;
@@ -48,12 +51,33 @@ void App::stop(){
     TTF_Quit();
 }
 
+#define TIME_POINT std::chrono::time_point<std::chrono::high_resolution_clock>
+#define DURATION std::chrono::duration<float>
+#define NOW ch::high_resolution_clock::now()
+
+float calculateDelta(TIME_POINT prev_time)
+{
+    TIME_POINT now = NOW;
+    DURATION rdelta = now - prev_time;
+    float delta = rdelta.count();
+    return delta;
+}
+
 void App::loop(){
+    TIME_POINT prev_time = NOW;
+    float delta;
+
     while(true){
-        draw();
         event_manager.update();
         if(event_manager.exit_signal) 
             return;
+        delta = calculateDelta(prev_time);
+        prev_time = NOW;
+        root_obj->onLoopUpdate(delta);
+        
+        // go through every object loop
+        // maybe we should register objects that are doing something
+        draw();
     }
 }
 

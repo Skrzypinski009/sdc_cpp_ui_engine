@@ -18,7 +18,7 @@ public:
     bool isJustPressed() const;
 
     bool pressedCheck(const Veci2 click_pos) const;
-    void onLoopUpdate() override;
+    void onLoopUpdate(float delta) override;
     void draw(SDL_Renderer* renderer) override;
 };
 

@@ -22,5 +22,6 @@ public:
     static int findObject(std::vector<Object*> objects_, Object* obj);
     void addObject(Object* obj);
     void removeAt(const std::size_t idx);
-    void update();
+    void onLoopUpdate(float delta) override;
+    void update() override;
 };

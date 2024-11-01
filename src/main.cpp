@@ -27,13 +27,20 @@ void registerStyles() {
 }
 
 void on_button_pressed(Object* sender){
-    Button* b1 = (Button*)sender;
-    b1->setSize(Veci2(30,30));
+    Button* b = (Button*) sender;
+    b->setSize(Veci2(30,30));
 }
 
 void on_button_released(Object* sender){
-    Button* b1 = (Button*)sender;
-    b1->setSize(Veci2(200,200));
+    Button* b = (Button*) sender;
+    b->setSize(Veci2(200,200));
+}
+
+void on_button_loop(Object* object, float delta){
+    Button* b = (Button*) object;
+    Veci2 bs = object->getSize();
+    if(bs.x > 50)
+        b->setSize(Veci2(bs.x -1, bs.y-1));
 }
 
 void createObjects(App &app){
@@ -53,10 +60,11 @@ void createObjects(App &app){
         Button *button = new Button(Veci2(200, 200), Veci2(200,200));
         button->setStyle("BlackWhite");
         button->setAlignH(Object::ALIGN_CENTER);
-        or_con->addObject(button);
         button->setName("button1");
         button->connect("button_pressed", on_button_pressed);
         button->connect("button_released", on_button_released);
+        button->setLoopFunction(on_button_loop);
+        or_con->addObject(button);
     }
 
     { //label

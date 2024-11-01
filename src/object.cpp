@@ -21,6 +21,7 @@ Object::Object(){
     setRectStyle(nullptr);
     setAlignH(ALIGN_LEFT);
     setAlignV(ALIGN_TOP);
+    loop_function = nullptr;
 }
 
 Object::Object(const Veci2 position_, const Veci2 size_, const int type_){
@@ -32,6 +33,7 @@ Object::Object(const Veci2 position_, const Veci2 size_, const int type_){
     setRectStyle(nullptr);
     setAlignH(ALIGN_LEFT);
     setAlignV(ALIGN_TOP);
+    loop_function = nullptr;
 }
 
 Object::Object(const Object &other){
@@ -43,6 +45,7 @@ Object::Object(const Object &other){
     setRectStyle(other.rect_style);
     setAlignH(other.align_h);
     setAlignV(other.align_v);
+    loop_function = nullptr;
 }
 
 std::string Object::strType() const {
@@ -122,6 +125,11 @@ std::string Object::getName() const {
     return name;
 }
 
+void Object::setLoopFunction(void (*loop_func)(Object*, float)){
+    Log::info((strType() + " object loop function is set").c_str());
+    loop_function = loop_func;
+}
+
 // getters
 
 Veci2 Object::getPosition() const {
@@ -191,6 +199,11 @@ void Object::draw(SDL_Renderer *renderer){
     // std::cout<<"drawing object\n";
     if(getRectStyle())
         getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
+}
+
+void Object::onLoopUpdate(float delta) {
+    if(loop_function == nullptr) return;
+    loop_function(this, delta);
 }
 
 void Object::update() {}

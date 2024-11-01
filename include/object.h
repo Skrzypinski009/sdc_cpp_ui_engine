@@ -24,6 +24,8 @@ class Object{
     Object* parent;
     RectStyle *rect_style;
     std::string name;
+
+    void (*loop_function)(Object*, float);
 public:
     int type;
     Veci2 position;
@@ -69,6 +71,7 @@ public:
     virtual void setRectStyle(RectStyle *rect_style);
     virtual void setStyle(const std::string);
     virtual void setName(const std::string);
+    virtual void setLoopFunction(void (*loop_func)(Object*, float));
 
     virtual Veci2 getPosition() const;
     virtual Veci2 getSize() const;
@@ -87,7 +90,7 @@ public:
     SDL_Rect getClipRect() const;
 
     virtual void draw(SDL_Renderer *renderer);
-    virtual void onLoopUpdate() {}
+    virtual void onLoopUpdate(float delta);
     virtual void update();
     virtual void updateParent();
 

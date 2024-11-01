@@ -67,7 +67,8 @@ bool Button::pressedCheck(const Veci2 click_pos) const {
     return false;
 }
 
-void Button::onLoopUpdate() {
+void Button::onLoopUpdate(float delta) {
+    Object::onLoopUpdate(delta);
     if(just_pressed){
         just_pressed_counter = true;
         if(just_pressed && just_pressed_counter){
