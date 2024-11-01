@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <map>
+#include <vector>
 
 #include "SDL.h"
 
@@ -89,6 +91,12 @@ public:
 
     virtual void emitSignal(std::string signal_name);
     virtual void connect(std::string signal_name, void (*func)(Object*));
+
+// Old Object Manager
+    static std::map<std::string, Object*> objects;
+    static void addObject(std::string name, Object* object);
+    static Object* getObject(std::string name);
+    static bool hasObject(std::string name);
 };
 
 /*

@@ -12,7 +12,6 @@
 
 #include "style_manager.h"
 #include "signal_manager.h"
-#include "object_manager.h"
 
 App app({1280, 720});
 
@@ -35,6 +34,7 @@ void on_button_pressed(Object* sender){
 void on_button_released(Object* sender){
     Button* b1 = (Button*)sender;
     b1->setSize(Veci2(200,200));
+    Object::getObject("label1")->setSize(Veci2(10,10));
 }
 
 void createObjects(App &app){
@@ -59,6 +59,7 @@ void createObjects(App &app){
         label->setSize({200, 30});
         label->setAlignH(Object::ALIGN_CENTER);
         // label->setRectStyle(rect_style);
+        label->setName("label1");
         or_con->addObject(label);
     }
     

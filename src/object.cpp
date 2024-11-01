@@ -1,6 +1,8 @@
 #include "object.h"
 
 #include <math.h>
+#include <map>
+#include <vector>
 
 #include "color.h"
 #include "veci2.h"
@@ -8,7 +10,6 @@
 #include "log.h"
 
 #include "style_manager.h"
-#include "object_manager.h"
 #include "signal_manager.h"
 
 Object::Object(){
@@ -105,12 +106,12 @@ void Object::setName(const std::string name_){
         Log::error("Object already has it's name! You canno't change it");
         return;
     }
-    if (ObjectManager::hasObject(name_)) {
+    if (Object::hasObject(name_)) {
         Log::error("Object with that name already exist!");
         return;
     }
     name = name_;
-    ObjectManager::addObject(name, this);
+    addObject(name, this);
 }
 std::string Object::getName() const {
     return name;
@@ -197,9 +198,29 @@ void Object::connect(std::string signal_name, void (*func)(Object*))
     SignalManager::connect(this, signal_name, func);
 }
 
-// void Object::PositionChanged()
-// {
 
-// }
+// Old Object Manager
+    std::map<std::string, Object*> Object::objects = {};
 
+    void Object::addObject(std::string name, Object* object){
+        if (Object::hasObject(name)) {
+            Log::error("Object Manager can't register object with that name!");
+            return;
+        }
+        Object::objects[name] = object;
+    }
 
+    Object* Object::getObject(std::string name){
+        if (!Object::hasObject(name)) {
+            Log::error("Object Manager can't return object with that name!");
+            return NULL;
+        }
+        return Object::objects.at(name);
+    }
+
+    bool Object::hasObject(std::string name){
+        if (Object::objects.find(name) == Object::objects.end())
+            return false;
+        return true;
+    }
+// --- Object manager
