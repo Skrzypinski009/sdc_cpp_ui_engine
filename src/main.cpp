@@ -7,7 +7,6 @@
 #include "order_container.h"
 #include "label.h"
 #include "app.h"
-#include "rect_style.h"
 #include "log.h"
 
 #include "style_manager.h"
@@ -15,15 +14,20 @@
 
 App app({1280, 720});
 
-
-
-
 void registerStyles() {
-    RectStyle *black_white = new RectStyle({Color("#000"), Color("#FFF")});
+    Style* black_white = new Style;
+        black_white->addOption("background_color", "#111111");
+        black_white->addOption("border_color", "#FFFFFF");
+
+    Style* gray = new Style;
+        gray->addOption("background_color", "#444444");
+
+    Style* red_border = new Style;
+        red_border->addOption("border_color", "#FF0000");
+
     StyleManager::addStyle("BlackWhite", black_white);
-    RectStyle *gray = new RectStyle({40,40,40, 255}, {0,0,0,0});
     StyleManager::addStyle("Gray", gray);
-    Log::print(StyleManager::styles);
+    StyleManager::addStyle("RedBorder", red_border);
 }
 
 void on_button_pressed(Object* sender){
@@ -79,11 +83,11 @@ void createObjects(App &app){
         Label *label = new Label("Hey, what's up?",
             "../fonts/SourceCodePro-Regular.ttf",
             20, {255,255,255}, true);
+        label->setStyle("RedBorder");
         label->loadFont();
         label->setPosition({100,100});
         label->setSize({200, 30});
         label->setAlignH(Object::ALIGN_CENTER);
-        // label->setRectStyle(rect_style);
         or_con->addObject(label);
     }
 }
@@ -94,7 +98,6 @@ int main(int argc, char *argv[])
     
     registerStyles();
     createObjects(app);
-    
     app.start();
     app.loop();
     app.stop();

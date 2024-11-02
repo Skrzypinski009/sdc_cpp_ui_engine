@@ -6,6 +6,7 @@
 
 #include "utils.h"
 #include "event_manager.h"
+#include "log.h"
 
 namespace ch = std::chrono;
 
@@ -44,7 +45,6 @@ void App::start(){
 void App::stop(){
     if(root_obj) 
         deleteObject(root_obj);
-    delete_styles();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -111,13 +111,4 @@ void App::deleteObject(Object *obj){
     }
     std::cout<<"deleting: "<<obj->strType()<<"\n";
     delete obj;
-}
-
-void App::register_style(RectStyle *rect_style){
-    styles.push_back(rect_style);
-}
-
-void App::delete_styles(){
-    for(RectStyle* rect_style : styles)
-        delete rect_style;
 }

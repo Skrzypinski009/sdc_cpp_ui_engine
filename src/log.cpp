@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <map>
 
-#include "rect_style.h"
 #include "style_manager.h"
 
 int Log::log_mode = Log::LogMode::INFO | Log::LogMode::WARNING | Log::LogMode::ERROR;
@@ -31,13 +30,6 @@ void Log::print(const Color c) {
     std::cout << (int)c.g << ", ";
     std::cout << (int)c.b << ", ";
     std::cout << (int)c.a << ")" << std::endl;
-}
-
-void Log::print(std::map<std::string, RectStyle*> m) {
-    std::cout << "Registered styles: " << std::endl;
-    for (const auto p : m) {
-        std::cout << "\t" <<p.first << std::endl;
-    }
 }
 
 void Log::info(const char* char_str) {

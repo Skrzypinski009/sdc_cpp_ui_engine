@@ -9,7 +9,7 @@
 #include "color.h"
 #include "veci2.h"
 #include "vec2.h"
-#include "rect_style.h"
+#include "style.h"
 
 
 enum ObjectType{
@@ -23,11 +23,11 @@ enum ObjectType{
 
 class Object{
     Object* parent;
-    RectStyle *rect_style;
     std::string name;
 
     void (*loop_function)(Object*, float);
 public:
+    Style* style;
     int type;
     Vec2 position;
     Vec2 size;
@@ -69,7 +69,7 @@ public:
     virtual void setAlignH(const int align_h_);
     virtual void setAlignV(const int align_v_);
     virtual void setParent(Object* object);
-    virtual void setRectStyle(RectStyle *rect_style);
+    // virtual void setRectStyle(RectStyle *rect_style);
     virtual void setStyle(const std::string);
     virtual void setName(const std::string);
     virtual void setLoopFunction(void (*loop_func)(Object*, float));
@@ -82,7 +82,7 @@ public:
     virtual std::size_t getAlignH() const;
     virtual std::size_t getAlignV() const;
     virtual Object* getParent() const;
-    virtual RectStyle* getRectStyle() const;
+    // virtual RectStyle* getRectStyle() const;
     virtual std::string getName() const;
 
     virtual void clearParent();
@@ -105,8 +105,3 @@ public:
     static bool hasObject(std::string name);
 };
 
-/*
-    (object_ptr, signal_name, signal_args?)
-
-
-*/

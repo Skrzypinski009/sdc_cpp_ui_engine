@@ -6,7 +6,6 @@
 
 #include "color.h"
 #include "veci2.h"
-#include "rect_style.h"
 #include "log.h"
 
 #include "style_manager.h"
@@ -18,7 +17,7 @@ Object::Object(){
     // setMinSize(Vec2(0,0));
     setSize(Vec2(0,0));
     setParent(nullptr);
-    setRectStyle(nullptr);
+    // setRectStyle(nullptr);
     setAlignH(ALIGN_LEFT);
     setAlignV(ALIGN_TOP);
     loop_function = nullptr;
@@ -30,7 +29,7 @@ Object::Object(const Vec2 position_, const Vec2 size_, const int type_){
     // setMinSize(Vec2(0,0));
     setSize(size_);
     setParent(nullptr);
-    setRectStyle(nullptr);
+    // setRectStyle(nullptr);
     setAlignH(ALIGN_LEFT);
     setAlignV(ALIGN_TOP);
     loop_function = nullptr;
@@ -42,7 +41,7 @@ Object::Object(const Object &other){
     setSize(other.getSize());
     // setMinSize(other.getMinSize());
     setParent(nullptr);
-    setRectStyle(other.rect_style);
+    // setRectStyle(other.rect_style);
     setAlignH(other.align_h);
     setAlignV(other.align_v);
     loop_function = nullptr;
@@ -101,12 +100,8 @@ void Object::setParent(Object* object_){
     parent = object_;
 }
 
-void Object::setRectStyle(RectStyle *rect_style_){
-    rect_style = rect_style_;
-}
-
 void Object::setStyle(const std::string key){
-    rect_style = StyleManager::getStyle(key);
+    style = StyleManager::getStyle(key);
 }
 
 void Object::setName(const std::string name_){
@@ -164,9 +159,9 @@ Object* Object::getParent() const {
     return parent;
 }
 
-RectStyle* Object::getRectStyle() const {
-    return rect_style;
-}
+// RectStyle* Object::getRectStyle() const {
+//     return rect_style;
+// }
 
 // -----
 
@@ -197,8 +192,34 @@ SDL_Rect Object::getClipRect() const {
 
 void Object::draw(SDL_Renderer *renderer){
     // std::cout<<"drawing object\n";
-    if(getRectStyle())
-        getRectStyle()->draw(renderer, Veci2(getGlobalPosition()), Veci2(getSize()));
+    if (style == nullptr) return;
+    Veci2 pos = getGlobalPosition();
+
+    if(style->hasOption("background_color")){
+        Color bg_color(style->get("background_color").c_str());
+
+        SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
+        SDL_SetRenderDrawColor(
+            renderer, 
+            bg_color.r, bg_color.g, 
+            bg_color.b, bg_color.a
+        );
+
+        SDL_RenderFillRect(renderer, &rect);
+    }
+    if(style->hasOption("border_color")){
+        Color border_color(style->get("border_color").c_str());
+
+        SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
+        SDL_SetRenderDrawColor(
+            renderer, 
+            border_color.r, border_color.g, 
+            border_color.b, border_color.a
+        );
+        SDL_RenderDrawRect(renderer, &rect);
+    }
+    // if(getRectStyle())
+        // getRectStyle()->draw(renderer, Veci2(getGlobalPosition()), Veci2(getSize()));
 }
 
 void Object::onLoopUpdate(float delta) {

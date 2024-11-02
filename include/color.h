@@ -1,5 +1,7 @@
 #pragma once 
 
+#include <string>
+
 #include "SDL.h"
 #include "utils.h"
 
@@ -20,6 +22,7 @@ public:
     Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     Color(Color* other);
     Color(const char* hex);
+    Color(const std::string hex);
 
     void setColor(const Color color);
 };

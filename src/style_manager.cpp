@@ -2,30 +2,40 @@
 
 #include <string>
 #include <map>
+#include <exception>
 
 #include "log.h"
 
-std::map<std::string, RectStyle*> StyleManager::styles = {};
+std::map<std::string, Style*> StyleManager::styles = {};
 
-void StyleManager::addStyle(const std::string key, RectStyle* style) {
-    if (StyleManager::styles.find(key) != StyleManager::styles.end()){
-        Log::error("Tried to add style to key, that already exist!");
-        return;
+void StyleManager::addStyle(const std::string key, Style* style)
+{
+    try
+    {
+        StyleManager::styles[key] = style;
     }
-    StyleManager::styles[key] = style;
+    catch (std::exception)
+    {
+        Log::error("Tried to add style to key, that already exist!");
+    }
 }
 
-RectStyle* StyleManager::getStyle(const std::string key) {
-    if (StyleManager::styles.find(key) == StyleManager::styles.end()) {
-        Log::error("Tried to get style by key, that doesn't exist!");
-        return NULL;
+Style* StyleManager::getStyle(const std::string key)
+{
+    try
+    {
+        return StyleManager::styles[key];
     }
-    return StyleManager::styles.at(key); 
+    catch (std::exception)
+    {
+        Log::error("There is no style with that name!");
+    }
+    return nullptr;
 }
 
 void StyleManager::clearStyles() {
-    for (const auto p : styles) {
+    for (const auto p : StyleManager::styles) {
         delete p.second;
     }
-    styles.clear();
+    StyleManager::styles.clear();
 }

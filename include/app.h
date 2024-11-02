@@ -10,7 +10,6 @@
 #include "container.h"
 #include "button.h"
 #include "event_manager.h"
-#include "rect_style.h"
 #include "veci2.h"
 
 struct App{
@@ -18,7 +17,6 @@ struct App{
     SDL_Renderer *renderer;
     Object* root_obj;
     EventManager event_manager;
-    std::vector<RectStyle*> styles;
     Veci2 window_size;
 
     App(Veci2 windows_size_);
@@ -30,6 +28,4 @@ struct App{
     void setRootObject(Object* obj);
     void updateRootObject();
     void deleteObject(Object *obj);
-    void register_style(RectStyle *rect_style);
-    void delete_styles();
 };

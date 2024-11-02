@@ -67,6 +67,11 @@ Color::Color(const char* hex) : Color(Color::BLACK) {
     }
 }
 
+Color::Color(const std::string hex)
+{
+    Color(hex.c_str());
+}
+
 void Color::setColor(const Color color){
     r = color.r;
     g = color.g;

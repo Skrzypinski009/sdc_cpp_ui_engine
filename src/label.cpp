@@ -85,8 +85,7 @@ void Label::loadFont(){
 
 void Label::draw(SDL_Renderer *renderer){
     // std::cout<<"drawing label"<<std::endl;
-    if(getRectStyle())
-        getRectStyle()->draw(renderer, getGlobalPosition(), getSize());
+    Object::draw(renderer);
 
     if(!text_font){
         std::cout << "Font is not loaded!\n";
