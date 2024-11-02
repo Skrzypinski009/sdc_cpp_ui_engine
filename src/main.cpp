@@ -18,6 +18,8 @@ void registerStyles() {
     Style* black_white = new Style;
         black_white->addOption("background_color", "#111111");
         black_white->addOption("border_color", "#FFFFFF");
+        black_white->addOption("background_color:pressed", "#000");
+        black_white->addOption("border_color:pressed", "#F00");
 
     Style* gray = new Style;
         gray->addOption("background_color", "#444444");

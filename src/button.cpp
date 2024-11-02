@@ -79,5 +79,16 @@ void Button::onLoopUpdate(float delta) {
 }
 
 void Button::draw(SDL_Renderer* renderer){
-    Object::draw(renderer);
+    if (style == nullptr) return;
+
+    Veci2 pos = getGlobalPosition();
+    SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
+    if (pressed)
+    {
+        style->drawBackground(renderer, "background_color:pressed", &rect);
+        style->drawBorder(renderer, "border_color:pressed", &rect);
+        return;
+    }
+    style->drawBackground(renderer, "background_color", &rect);
+    style->drawBorder(renderer, "border_color", &rect);
 }

@@ -191,35 +191,12 @@ SDL_Rect Object::getClipRect() const {
 }
 
 void Object::draw(SDL_Renderer *renderer){
-    // std::cout<<"drawing object\n";
     if (style == nullptr) return;
+
     Veci2 pos = getGlobalPosition();
-
-    if(style->hasOption("background_color")){
-        Color bg_color(style->get("background_color").c_str());
-
-        SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
-        SDL_SetRenderDrawColor(
-            renderer, 
-            bg_color.r, bg_color.g, 
-            bg_color.b, bg_color.a
-        );
-
-        SDL_RenderFillRect(renderer, &rect);
-    }
-    if(style->hasOption("border_color")){
-        Color border_color(style->get("border_color").c_str());
-
-        SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
-        SDL_SetRenderDrawColor(
-            renderer, 
-            border_color.r, border_color.g, 
-            border_color.b, border_color.a
-        );
-        SDL_RenderDrawRect(renderer, &rect);
-    }
-    // if(getRectStyle())
-        // getRectStyle()->draw(renderer, Veci2(getGlobalPosition()), Veci2(getSize()));
+    SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
+    style->drawBackground(renderer, "background_color", &rect);
+    style->drawBorder(renderer, "border_color", &rect);
 }
 
 void Object::onLoopUpdate(float delta) {
