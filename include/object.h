@@ -18,7 +18,8 @@ enum ObjectType{
     ORDER_CONTAINER,
     RECTANGLE,
     LABEL,
-    BUTTON
+    BUTTON,
+    TEXT_INPUT,
 };
 
 class Object{
@@ -59,6 +60,7 @@ public:
     Object(const Object &other);
     Object();
     Object(const Vec2 position_, const Vec2 size_, const int type_=ObjectType::OBJECT);
+    ~Object();
 
     std::string strType() const;
     virtual void setPosition(const Vec2 position_);
@@ -103,5 +105,7 @@ public:
     static void addObject(std::string name, Object* object);
     static Object* getObject(std::string name);
     static bool hasObject(std::string name);
+// type checking
+    bool isInputObject() const;
 };
 

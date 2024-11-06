@@ -7,6 +7,7 @@
 #include "utils.h"
 #include "event_manager.h"
 #include "log.h"
+#include "container.h"
 
 namespace ch = std::chrono;
 
@@ -38,7 +39,7 @@ App::App(Veci2 window_size_){
 }
 
 void App::start(){
-    event_manager.registerAllButtons(root_obj);
+    // event_manager.registerAllButtons(root_obj);
     updateRootObject();
 }
 
@@ -67,8 +68,8 @@ void App::loop(){
     TIME_POINT prev_time = NOW;
     float delta;
 
-    while(true){
-        event_manager.update();
+    while(true & root_obj != nullptr){
+        event_manager.update((Container*) root_obj);
         if(event_manager.exit_signal) 
             return;
         delta = calculateDelta(prev_time);
@@ -109,6 +110,6 @@ void App::deleteObject(Object *obj){
             deleteObject(child);
         }
     }
-    std::cout<<"deleting: "<<obj->strType()<<"\n";
+    Log::info((std::string("deleting: ") + obj->strType()).c_str());
     delete obj;
 }

@@ -1,6 +1,6 @@
 #include "object.h"
 
-#include <math.h>
+#include <cmath>
 #include <map>
 #include <vector>
 
@@ -45,6 +45,10 @@ Object::Object(const Object &other){
     setAlignH(other.align_h);
     setAlignV(other.align_v);
     loop_function = nullptr;
+}
+
+Object::~Object(){
+    style = nullptr;
 }
 
 std::string Object::strType() const {
@@ -225,7 +229,7 @@ void Object::updateParent()
     }
 // ----------------------------
 
-// Old Object Manager
+// Object Manager
     std::map<std::string, Object*> Object::objects = {};
 
     void Object::addObject(std::string name, Object* object){
@@ -249,4 +253,15 @@ void Object::updateParent()
             return false;
         return true;
     }
-// --- Object manager
+// END Object manager
+
+
+// type checking
+
+bool Object::isInputObject() const {
+    if (type == BUTTON || type == TEXT_INPUT)
+        return true;
+    return false;
+}
+
+// END type checking

@@ -74,11 +74,11 @@ void createObjects(App &app){
         Button *button = new Button(Veci2(200, 200), Veci2(200,200));
         button->setStyle("BlackWhite");
         button->setAlignH(Object::ALIGN_CENTER);
-        button->setName("button1");
-        button->connect("button_pressed", on_button_pressed);
-        button->connect("button_released", on_button_released);
-        button->setLoopFunction(on_button_loop);
-        con->addObject(button);
+        // button->setName("button1");
+        button->connect("pressed", on_button_pressed);
+        button->connect("released", on_button_released);
+        // button->setLoopFunction(on_button_loop);
+        or_con->addObject(button);
     }
 
     { //label
@@ -103,7 +103,6 @@ int main(int argc, char *argv[])
     app.start();
     app.loop();
     app.stop();
-    
     StyleManager::clearStyles();
     return 0;
 }
