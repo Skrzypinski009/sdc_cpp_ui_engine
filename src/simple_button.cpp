@@ -1,21 +1,22 @@
-#include "button.h"
+#include "simple_button.h"
 
 #include <iostream>
 
 #include "signal_manager.h"
+#include "log.h"
 
-Button::Button() 
+SimpleButton::SimpleButton() 
     : InputObject({0,0}, {100,100}, ObjectType::BUTTON) {}
 
-Button::Button(const Vec2 position_, const Vec2 size_) 
+SimpleButton::SimpleButton(const Vec2 position_, const Vec2 size_) 
     : InputObject(position_, size_, ObjectType::BUTTON) {}
 
-Button::Button(const Button &other) 
+SimpleButton::SimpleButton(const SimpleButton &other) 
     : InputObject(other.getPosition(), other.getSize(), other.type) {
     // setMinSize(other.getMinSize());
 }
 
-// void Button::setPressed(const bool pressed_){
+// void SimpleButton::setPressed(const bool pressed_){
 //     pressed = pressed_;
 //     if(pressed){
 //         just_pressed = true;
@@ -27,23 +28,21 @@ Button::Button(const Button &other)
 //     }
 // }
 
-void Button::onLoopUpdate(float delta) {
+void SimpleButton::onLoopUpdate(float delta) {
     Object::onLoopUpdate(delta);
     if(just_pressed)
             just_pressed = false;
 }
 
-void Button::draw(SDL_Renderer* renderer){
+void SimpleButton::draw(SDL_Renderer* renderer){
     if (style == nullptr) return;
 
     Veci2 pos = getGlobalPosition();
     SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
     if (isPressed())
     {
-        style->drawBackground(renderer, "background_color:pressed", &rect);
-        style->drawBorder(renderer, "border_color:pressed", &rect);
+        style->drawRect(renderer, &rect, "pressed");
         return;
     }
-    style->drawBackground(renderer, "background_color", &rect);
-    style->drawBorder(renderer, "border_color", &rect);
+    style->drawRect(renderer, &rect);
 }

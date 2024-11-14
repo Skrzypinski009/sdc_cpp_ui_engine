@@ -85,6 +85,7 @@ void App::loop(){
 void App::draw(){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+
     if(root_obj)
         root_obj->draw(renderer);
     SDL_RenderPresent(renderer);

@@ -8,106 +8,63 @@
 
 #include "object.h"
 #include "veci2.h"
+#include "log.h"
 
 
-Label::Label(
-    const std::string text_, 
-    const std::string font_path_,
-    const std::size_t font_size_,
-    const SDL_Color color_,
-    const bool wrapped_
+Label::Label(SDL_Renderer *renderer_, const std::string text_, const std::string& style_name_
 ) : Object({0,0}, {100, 100}, type=ObjectType::LABEL) {
-    text = text_;
-    font_path = font_path_;
-    font_size = font_size_;
-    color = color_;
-    wrapped = wrapped_;
+    renderer = renderer_;
+    setStyle(style_name_);
+    setText(text_);
 }
 
-Label::Label() : Object({0,0}, {100, 100}, type=ObjectType::LABEL) {
+Label::Label() : Object({0,0}, {200, 30}, type=ObjectType::LABEL) {
+    renderer = nullptr;
     text = "";
-    font_size = 20;
-    color = {255,255,255};
-    wrapped = false;
-    //no font path
+    setStyle("text_default");
 }
 
 Label::~Label(){
     TTF_CloseFont(text_font);
+    SDL_DestroyTexture(text_texture);
+    SDL_FreeSurface(text_surface);
 }
 
 void Label::setText(const std::string text_){
     text = text_;
+    createTexture();
+}
+
+void Label::setSize(Vec2 size_){
+    Object::setSize(size_);
+    createTexture();
 }
 
 std::string Label::getText() const {
     return text;
 }
-
-void Label::setFontPath(const std::string font_path_){
-    font_path = font_path_;
-}
-
-std::string Label::getFontPath() const {
-    return font_path;
-}
-
-void Label::setFontSize(const std::size_t font_size_){
-    font_size = font_size_;
-}
-
-std::size_t Label::getFontSize() const {
-    return font_size;
-}
-
-void Label::setColor(const SDL_Color color_){
-    color = color_;
-}
-
-SDL_Color Label::getColor() const {
-    return color;
-}
-
-void Label::setWrapped(const bool wrapped_){
-    wrapped = wrapped_;
-}
-
-bool Label::getWrapped() const {
-    return wrapped;
-}
-
-void Label::loadFont(){
-    text_font = TTF_OpenFont(font_path.c_str(), font_size);
-    if(!text_font){
-        std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
-    }
-}
-
-void Label::draw(SDL_Renderer *renderer){
-    // std::cout<<"drawing label"<<std::endl;
+void Label::draw(SDL_Renderer *renderer_){
     Object::draw(renderer);
 
-    if(!text_font){
-        std::cout << "Font is not loaded!\n";
-        return;
-    }
-    SDL_Surface *text_surface;
-
-    if(wrapped)
-        text_surface = TTF_RenderText_Blended_Wrapped(text_font, text.c_str(), color, (int)getSize().x);
-    else
-        text_surface = TTF_RenderText_Blended(text_font, text.c_str(), color);
-
-    if(!text_surface){
-        std::cout << "Failed to render text: " << TTF_GetError() << std::endl;
-    }
-    SDL_Texture *text_texture = SDL_CreateTextureFromSurface( renderer, text_surface );
     SDL_Rect rect = {(int)getGlobalPosition().x, (int)getGlobalPosition().y, text_surface->w, text_surface->h};
     SDL_Rect clip_rect = getClipRect();
-    SDL_RenderSetClipRect(renderer, &clip_rect);
-    SDL_RenderCopy(renderer, text_texture, NULL, &rect);
-    SDL_RenderSetClipRect(renderer, NULL);
-    SDL_DestroyTexture(text_texture);
-    SDL_FreeSurface(text_surface);
+    if (style == nullptr) return;
+    style->drawText(renderer, text_texture, &rect, &clip_rect);
+
 }
 
+void Label::createTexture()
+{
+    if (style == nullptr) return;
+    style->createTextTexture(renderer, (int)getSize().x, text, &text_font, &text_texture, &text_surface, "");
+    if (style->get("text_clip") == "false"){
+        if (style->get("text_wrap") == "true"){
+            size = (Vec2(getSize().x, (float)text_surface->h));
+            return;
+        }
+        float y = (float)text_surface->h;
+        if (getSize().y > y) y = getSize().y;
+        size = (Vec2((float)text_surface->w, y));
+        return;
+    }
+}

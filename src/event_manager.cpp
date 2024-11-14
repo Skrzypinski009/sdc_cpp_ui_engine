@@ -19,14 +19,6 @@ void EventManager::update(Container* root_obj){
         if(ev.type == SDL_QUIT)
             exit_signal = true;
         else if(ev.type == SDL_MOUSEBUTTONDOWN){
-            //std::cout<<"Mouse button down at: ("<< ev.button.x << ", " << ev.button.y << ")\n";
-            // Button* button = checkButtons({ev.button.x, ev.button.y});
-            // if(button){
-            //     focus_button = button;
-            //     button->setPressed(true);
-            // } else {
-            //     focus_button = nullptr;
-            // }
             if (focus_object != nullptr)
                 focus_object->setFocused(false);
             focus_object = nullptr;
@@ -42,53 +34,6 @@ void EventManager::update(Container* root_obj){
         }
     }
 }
-
-
-// Adding button pointer to buttons in EventManager object.
-// returns 1 on success and 0 on fail.
-// int EventManager::registerButton(Button *button){
-//     if(findObjectInVector(buttons, button) == -1){
-//         buttons.push_back(button);
-//         return 1;
-//     }
-//     return 0;
-// }
-
-// Removing button pointer from buttons in EventManager object.
-// returns 1 on success and 0 on fail.
-
-// int EventManager::unregisterButton(Button *button){
-//     int idx = findObjectInVector(buttons, button);
-//     if(idx > -1){
-//         buttons.erase(buttons.begin() + idx);
-//         return 1;
-//     }
-//     return 0;
-// }
-
-// void EventManager::unregisterAllButtons(){
-//     buttons.clear();
-// }
-
-// void EventManager::registerAllButtons(Object* obj){
-//     unregisterAllButtons();
-//     if(obj){
-//         scanObjectForButtons(obj);
-//     }
-// }
-
-// void EventManager::scanObjectForButtons(Object* obj){
-//     if(obj->type == ObjectType::CONTAINER || obj->type == ObjectType::ORDER_CONTAINER){
-//         Container* con = (Container*)obj;
-//         for(int i = con->objects.size()-1; i>-1; i--){
-//             scanObjectForButtons(con->objects[i]);
-//         }
-//         return;
-//     }
-//     if(obj->type == ObjectType::BUTTON){
-//         registerButton( (Button*)obj );
-//     }
-// }
 
 bool EventManager::changeFocus(const Veci2 click_pos, Container* container = nullptr) {
     int n = container->objects.size();

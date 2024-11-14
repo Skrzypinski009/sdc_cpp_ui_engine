@@ -24,30 +24,30 @@ void registerStyles() {
     Style* gray = new Style;
         gray->addOption("background_color", "#444444");
 
-    Style* red_border = new Style;
-        red_border->addOption("border_color", "#FF0000");
+    Style* text_style = new Style;
+        // font_style->addOption("border_color", "#FF0000");
+        text_style->addOption("font_path", "../fonts/SourceCodePro-Regular.ttf");
+        text_style->addOption("font_size", "28");
+        text_style->addOption("text_color", "#000088");
+        text_style->addOption("text_wrap", "false");
+        text_style->addOption("text_clip", "false");
 
     StyleManager::addStyle("BlackWhite", black_white);
     StyleManager::addStyle("Gray", gray);
-    StyleManager::addStyle("RedBorder", red_border);
+    StyleManager::addStyle("text_default", text_style);
 }
 
 void on_button_pressed(Object* sender){
-    Button* b = (Button*) sender;
+    SimpleButton* b = (SimpleButton*) sender;
     b->setSize(Vec2(30,30));
 }
 
 void on_button_released(Object* sender){
-    Button* b = (Button*) sender;
+    SimpleButton* b = (SimpleButton*) sender;
     b->setSize(Vec2(200,200));
 }
 
 void on_button_loop(Object* obj, float delta){
-    // Button* b = (Button*) object;
-    // Vec2 bs = object->getSize();
-    // float speed = delta * 30;
-    // if(bs.x > 50)
-        // b->setSize(Vec2(bs.x - speed, bs.y - speed));
     Veci2 m_pos;
     Vec2 o_pos = obj->getPosition();
     Vec2 o_size = obj->getSize();
@@ -70,8 +70,16 @@ void createObjects(App &app){
         con->addObject(or_con);
     }
 
+    { //label
+        Label *label = new Label(app.renderer, "Hey, what's up?", "text_default");
+        label->setPosition({100,100});
+        label->setSize({150, 20});
+        label->setAlignH(Object::ALIGN_LEFT);
+        or_con->addObject(label);
+    }
+
     { //button
-        Button *button = new Button(Veci2(200, 200), Veci2(200,200));
+        SimpleButton *button = new SimpleButton(Veci2(200, 200), Veci2(200,200));
         button->setStyle("BlackWhite");
         button->setAlignH(Object::ALIGN_CENTER);
         // button->setName("button1");
@@ -81,17 +89,6 @@ void createObjects(App &app){
         or_con->addObject(button);
     }
 
-    { //label
-        Label *label = new Label("Hey, what's up?",
-            "../fonts/SourceCodePro-Regular.ttf",
-            20, {255,255,255}, true);
-        label->setStyle("RedBorder");
-        label->loadFont();
-        label->setPosition({100,100});
-        label->setSize({200, 30});
-        label->setAlignH(Object::ALIGN_CENTER);
-        or_con->addObject(label);
-    }
 }
 
 

@@ -3,6 +3,7 @@
 #include "color.h"
 #include "object.h"
 #include "veci2.h"
+#include "log.h"
 
 
 Container::Container()

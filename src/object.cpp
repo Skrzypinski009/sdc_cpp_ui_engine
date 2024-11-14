@@ -199,8 +199,7 @@ void Object::draw(SDL_Renderer *renderer){
 
     Veci2 pos = getGlobalPosition();
     SDL_Rect rect = {pos.x, pos.y, (int)size.x, (int)size.y};
-    style->drawBackground(renderer, "background_color", &rect);
-    style->drawBorder(renderer, "border_color", &rect);
+    style->drawRect(renderer, &rect);
 }
 
 void Object::onLoopUpdate(float delta) {

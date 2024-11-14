@@ -8,7 +8,7 @@
 
 #include "object.h"
 #include "container.h"
-#include "button.h"
+#include "simple_button.h"
 #include "event_manager.h"
 #include "veci2.h"
 
